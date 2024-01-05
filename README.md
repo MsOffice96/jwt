@@ -1,7 +1,8 @@
 # JWT (json web token)
 
 ## JWT : Header + Payload + Signature
-Header : 사용된 토큰 유형 및 서명 알고리즘(토큰 유형은 JWT, 서명 해쉬 알고리즘은 HMAC, SHA256...)
+Header(typ + alg) : 사용된 토큰 타입(typ) = JWT 및 해싱 알고리즘(alg)= HMAC SHA256, RSA... =>  {"alg":"HS256","typ":"JWT"}
+
 PayLoad: Claim이 포함된 토큰의 두번째 부분이며 registered, public, private Claim 3가지로 구성되고 어플리케이션 데이터(사용자 ID, 이름), 토큰 만료시간, 발급자, 제목 포함
 Signature: secret key를 포함하며 암호화 되어 있음
 
