@@ -1,0 +1,38 @@
+# Maria_DB + JWT TOKEN
+
+version: '3.4'
+
+services:
+  Maria_DB:
+    image: mariadb:latest
+    container_name: maria_db
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/conf.d:/etc/mysql/conf.d
+    env_file:
+      - .env
+    environment:
+      TZ: Asia/Seoul
+    restart: always
+    networks:
+      - jwt-network
+  
+  Redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "127.0.0.1:6000:6379"
+    restart: always
+    volumes:
+      - ./data/:/data
+      - ./config/redis.config:/usr/local/conf/redis.conf
+    command: redis-server /usr/local/conf/redis.conf
+    networks:
+      - jwt-network
+
+
+networks:
+  jwt-network:
+    driver: "bridge"
